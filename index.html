@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <title>Mhir</title>
+</head>
+<style>
+    * {
+        margin:0px;
+        padding:0px;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Roboto', sans-serif;
+    }
+
+    nav {
+        display: flex;
+        background-color: black;
+        color: white;
+        width: 100%;
+        padding: 5px;
+        align-items: center;
+    }
+
+    .left, .right {
+        width: 50%;
+    }
+
+    .right {
+        display: flex;
+        justify-content: right;
+        align-items: center;
+    }
+
+    .left {
+        display: flex;
+        gap: 4px;
+        align-items: center;
+    }
+
+    .logo {
+        height: 15px;
+        width: 15px;
+        background-color: white;
+        border-radius: 50%;
+    }
+
+    .btn {
+        margin: 2px;
+        padding: 1px;
+        padding-left: 5px;
+        padding-right: 5px;
+        color:white;
+        cursor: pointer;
+    }
+    
+    .add {
+        border: 2px white solid;
+        background-color: black;
+        border-radius: 6px;
+    }
+
+    .login {
+        background-color:rgb(91, 16, 231);
+        border-radius: 5px;
+        border: 2px solid rgb(91, 16, 231);
+    }
+
+    main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 30ch;
+        background-color: #dadbf1;
+    }
+
+    .hold {
+        text-align: center;
+    }
+
+    .search {
+        width: 55ch;
+        height: 6ch;
+        padding: 9px;
+        font-size: medium;
+        border-radius: 10px;
+        border: none;
+        box-shadow: 0 0 5px 1px grey;
+        outline: none;
+    }
+
+    .find {
+        margin: 10px;
+        font-size: 3rem;
+
+    }
+
+    i {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        margin-bottom: 1.8ch;
+        margin-right: 7px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .searchbox {
+        position: relative;
+        width: 50ch;
+        display: flex;
+    }
+
+    #icon {
+        cursor: pointer;
+    }
+
+    .section {
+        padding: 7ch;
+        position: relative;
+    }
+
+    .heading {
+        font-size: 2rem;
+    }
+
+    .box {
+        height: 250px;
+        min-width: 350px;
+        border: solid;
+        margin: 10px;
+        transition: 0.6s opacity ease-in-out;
+    }
+
+    .container {
+       margin-top: 20px;
+       display: flex;
+       overflow: hidden;
+       position: relative;
+    }
+
+    .center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+<body>
+    <nav>
+        <div class="left">
+            <div class="logo"></div>
+            <div>Mhir</div>
+        </div>
+        <div class="right">
+            <button class="btn add">Add house</button>
+            <button class="btn login">Login</button>
+        </div>
+    </nav>
+    <main>
+        <div class="hold">
+            <div class="find">Find A Place</div>
+            <div class="searchbox">
+                <input class="search" type="" placeholder="Enter Location">
+                <i><svg id="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;"><path d="M10 18a7.952 7.952 0 0 0 4.897-1.688l4.396 4.396 1.414-1.414-4.396-4.396A7.952 7.952 0 0 0 18 10c0-4.411-3.589-8-8-8s-8 3.589-8 8 3.589 8 8 8zm0-14c3.309 0 6 2.691 6 6s-2.691 6-6 6-6-2.691-6-6 2.691-6 6-6z"></path></svg></i>
+            </div>
+        </div>
+    </main>
+
+    <div class="section">
+        <div class="heading">Top Places</div>
+        <div class="container">
+           <div class="box"></div> 
+           <div class="box"></div> 
+           <div class="box"></div> 
+           <div class="box"></div> 
+           <div class="box"></div> 
+           <div class="box"></div> 
+           <div class="box"></div> 
+           <div class="box"></div> 
+           <div class="box"></div> 
+           <div class="box"></div> 
+        </div>
+    </div>
+            <div class="center">
+                <button onclick="change(-1)"><</button>
+                <button onclick="change(1)">></button>
+            </div>
+    <script>
+
+        let curr_Slide = 0;
+        let box = document.getElementsByClassName("box")
+       
+        function change(a) {
+            console.log("working")
+           show(curr_Slide += a)
+        }
+        function show() {
+            for(var i=0;i<box.length;i++) {
+                box[i].style.opacity="0"
+                box[i].style.display="none"
+            }
+
+            if(curr_Slide >= box.length - 1) {
+                curr_Slide = 0;
+            }
+            if(curr_Slide < 0) {
+                curr_Slide = box.length - 2;
+            }
+
+            box[curr_Slide].style.display="block"
+            box[curr_Slide].style.opacity="100";
+            box[curr_Slide + 1].style.display="block"
+            box[curr_Slide + 1].style.opacity="100";
+            console.log(curr_Slide)
+        }
+
+        show();
+
+        let colors = ["red","yellow","pink","green","black","blue","purple","hotpink","skyblue","darkblue"]
+        for(var i=0;i<=box.length;i++) {
+            box[i].style.backgroundColor= colors[i];
+        }
+
+    </script>
+</body>
+</html>
